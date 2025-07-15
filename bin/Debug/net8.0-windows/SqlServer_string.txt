@@ -1,0 +1,1 @@
+  Server=DESKTOP-HA\SQLEXPRESS;Database=SEOAnalyzer;Trusted_Connection=SSPI;Encrypt=false;TrustServerCertificate=true

@@ -1,0 +1,1911 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Analytics & Search Console Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="analyzeSeoAnalyticsBtn">Phân tích SEO Google Analytics</button>
+    <button id="analyzeSearchConsleBtn">Phân tích SEO Search Console</button>
+
+    <div id="seoAnalysisResult" style="margin-top: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9; display: none;">
+        <h3>Kết quả phân tích SEO</h3>
+        <ul id="seoRecommendations"></ul>
+    </div>
+    <h2>🔍 Dữ liệu phân tích Google Search Console</h2>
+    <div>
+        <h3>Chọn quãng thời gian</h3>
+        <select id="searchConsoleDateRangeSelect">
+            <!--<option value="last_24_hours">24 giờ</option>-->
+            <option value="last_7_days">7 ngày</option>
+            <option value="last_28_days">28 ngày</option>
+            <option value="last_3_months">3 tháng</option>
+        </select>
+        <button id="loadSearchConsoleDataBtn">Thu thập dữ liệu</button>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>🖥️ Hiệu suất tổng quát</h3>
+            <canvas id="hieusuatChart"></canvas>
+        </div>
+        <table class="data-table" id="hieusuatTable">
+            <thead>
+                <tr>
+                    <th>Ngày</th>
+                    <th>Tổng số lượt nhấp</th>
+                    <th>Tổng số lượt hiển thị</th>
+                    <th>CTR trung bình</th>
+                    <th>Vị trí trung bình</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>🔑 Bảng dữ liệu từ khóa </h3>
+            <div class="export-btn-wrapper">
+                <button id="exportExcelBtn" class="export-excel-btn">
+                    📤 Xuất Excel
+                </button>
+                <button style="margin-left:30px" id="exportOldPosition" class="export-excel-btn">
+                    💾 Lưu vị trí từ khóa
+                </button>
+            </div>
+            <table id="combinedTable" border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
+                <thead>
+                    <tr>
+                        <th>Từ Khóa</th>
+                        <th>Lượt Nhấp <button id="SapXepClickscombinedTable" class="desc"></button></th>
+                        <th>Lượt Hiển Thị</th>
+                        <th>CTR (%) <button id="SapXepCTRcombinedTable"></button></th>
+                        <th>Vị Trí Google Trung Bình <button id="SapXepVitricombinedTable"></button></th>
+                        <th>Số trang sử dụng từ khoá</th>
+                        <th>Tỉ lệ sử dụng từ khoá <button id="SapXepTilecombinedTable"></button></th>
+                        <th>AI Đề Xuất Từ Khoá Cải Thiện</th>
+                        <th>AI Gợi Ý Cải Thiện</th>
+                        <th>Vị trí cũ</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>📑 Bảng hiệu suất từng trang</h3>
+            <table class="data-table" id="performanceTable" style="width: 100%; border-collapse: collapse; text-align: center;">
+                <thead>
+                    <tr>
+                        <th>Trang</th>
+                        <th>Lượt nhấp <button id="SapXepClicksperformanceTable" class="desc"></button></th>
+                        <th>Lượt hiển thị</th>
+                        <th>CTR (%)<button id="SapXepCTRperformanceTable"></button></th>
+                        <th>Vị trí trung bình <button id="SapXepVitriperformanceTable"></button></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>🌟 Đánh giá trang</h3>
+            <table class="data-table" id="danhgiatable" style="width: 100%; border-collapse: collapse; text-align: center;">
+                <thead>
+                    <tr>
+                        <th>Trang</th>
+                        <th>Từ khoá</th>
+                        <th>Lượt nhấp</th>
+                        <th>Lượt hiển thị</th>
+                        <th>CTR (%)</th>
+                        <th>Vị trí trung bình</th>
+                        <th>Đánh giá</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <h2>📊 Dữ liệu phân tích Google Analytics</h2>
+    <div>
+        <h3>Chọn quãng thời gian</h3>
+        <select id="dateRangeSelect">
+            <option value="today">Hôm nay</option>
+            <option value="yesterday">Hôm qua</option>
+            <option value="this_week">Tuần này</option>
+            <option value="last_week">Tuần trước</option>
+            <option value="last_7_days" selected>7 ngày trước</option>
+            <option value="last_14_days">14  ngày trước</option>
+        </select>
+        <button id="loadDataBtn">Thu thập dữ liệu phân tích</button>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>📄 Thống kê theo tiêu đề trang</h3>
+            <table class="data-table" id="pageTitleAnalyticsTable" style="width: 100%; border-collapse: collapse; text-align: center;">
+                <thead>
+                    <tr>
+                        <th>Tiêu đề trang</th>
+                        <th>Số lần xem</th>
+                        <th>Số người dùng đang hoạt động</th>
+                        <th>Số lượt xem trên mỗi người dùng đang hoạt động</th>
+                        <th>Thời gian tương tác trung bình trên mỗi người dùng đang hoạt động (giây)</th>
+                        <th>Tổng số sự kiện</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>🏙️ Lưu lượng người dùng hoạt động trên các tỉnh thành</h3>
+            <canvas id="activeUsersPerCityChart"></canvas>
+        </div>
+        <table class="data-table" id="activeUsersPerCityTable">
+            <thead>
+                <tr><th>Thành phố</th><th>Người dùng đang hoạt động</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>🧑‍🤝‍🧑 Người dùng mới</h3>
+            <canvas id="newUsersChart"></canvas>
+        </div>
+        <table class="data-table" id="newUsersTable">
+            <thead>
+                <tr><th>Ngày</th><th>Người dùng mới</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>🔥 Người dùng đang hoạt động</h3>
+            <canvas id="activeUsersChart"></canvas>
+        </div>
+        <table class="data-table" id="activeUsersTable">
+            <thead>
+                <tr><th>Ngày</th><th>Người dùng đang hoạt động</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>📈 Sự kiện trên mỗi người dùng</h3>
+            <canvas id="eventsPerUserChart"></canvas>
+        </div>
+        <table class="data-table" id="eventsPerUserTable">
+            <thead>
+                <tr><th>Ngày</th><th>Sự kiện/người dùng</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>📊 Số phiên trên mỗi người dùng</h3>
+            <canvas id="sessionsPerUserChart"></canvas>
+        </div>
+        <table class="data-table" id="sessionPerUserTable">
+            <thead>
+                <tr><th>Ngày</th><th>Số phiên trên mỗi người dùng</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>📉 Sự kiện trên mỗi phiên</h3>
+            <canvas id="eventsPerSessionChart"></canvas>
+        </div>
+        <table class="data-table" id="eventsPerSessionTable">
+            <thead>
+                <tr><th>Ngày</th><th>Sự kiện trên mỗi phiên</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>📈 Lượt xem trên mỗi người dùng</h3>
+            <canvas id="pageViewsPerUserChart"></canvas>
+        </div>
+        <table class="data-table" id="pageViewsPerUserTable">
+            <thead>
+                <tr><th>Ngày</th><th>Lượt xem/người dùng</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>🚀 Tỷ lệ thoát và Tương tác</h3>
+            <canvas id="bounceRateChart"></canvas>
+        </div>
+        <table class="data-table" id="bounceRateTable">
+            <thead>
+                <tr><th>Ngày</th><th>Tỷ lệ thoát (%)</th><th>Tỷ lệ tương tác (%)</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <button id="chatButton" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: #00BFFF; color: white; border: none; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); font-size: 24px; display: flex; align-items: center; justify-content: center;">
+        💬
+    </button>
+
+    <div id="chatBox" class="hidden" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; height: 450px; background: white; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column;">
+        <div style="padding: 10px; background-color: #00BFFF; color: white; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center;">
+            <h4 style="margin: 0;">Chat với AI</h4>
+            <button id="closeChat" style="background: transparent; border: none; color: white; font-size: 18px; cursor: pointer;">🗙</button>
+        </div>
+        <div id="chatContent" style="flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column;">
+        </div>
+        <div style="padding: 10px;">
+            <input type="text" id="userMessage" placeholder="Nhập tin nhắn..." style="width: calc(100% - 80px); padding: 5px; border: 1px solid #ddd; border-radius:5px;" autocomplete="off">
+            <button id="sendMessage" style="padding: 5px 20px; border: none; background-color: #00BFFF; color: white; border-radius: 5px; cursor: pointer;">Gửi</button>
+        </div>
+    </div>
+
+    <script>
+        // Global variables to store chart instances
+        let activeUsersPerCityChart, newUsersChart, activeUsersChart, sessionsPerUserChart, eventsPerUserChart, eventsPerSessionChart, pageViewsPerUserChart, bounceRateChart, hieusuatChart;
+        let _startDate, _endDate, _exportOldPositionDate;
+        // Initialize the dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load default data
+            loadAnalyticsData();
+            loadSearchConsoleData();
+        });
+        document.getElementById('loadDataBtn').addEventListener('click', loadAnalyticsData);
+        document.getElementById('loadSearchConsoleDataBtn').addEventListener('click', loadSearchConsoleData);
+        // Function to load and display Google Analytics data
+        async function loadAnalyticsData() {
+            try {
+                const dateRange = document.getElementById('dateRangeSelect').value;
+
+                // Show loading state
+                document.getElementById('loadDataBtn').textContent = 'Đang tải...';
+                document.getElementById('loadDataBtn').disabled = true;
+
+                // Send request to backend
+                const response = await chrome.webview.postMessage(JSON.stringify({
+                    type: 'analytics',
+                    dateRange: dateRange,
+                }));
+
+                // Process response (this would normally come from the backend)
+                // In this case, we'll simulate the response handling
+            } catch (error) {
+                console.error('Error loading analytics data:', error);
+                alert('Lỗi khi tải dữ liệu Analytics: ' + error.message);
+            } finally {
+                document.getElementById('loadDataBtn').textContent = 'Thu thập dữ liệu phân tích';
+                document.getElementById('loadDataBtn').disabled = false;
+            }
+        }
+
+        let latestAnalyticsData = null;
+        function updateAnalyticsDashboard(data) {
+            console.log("Dữ liệu Analytics nhận được từ API:", data);
+            latestAnalyticsData = data;
+
+            // Sort items by date
+            const sortedItems = [...data.Items].sort((a, b) => new Date(a.Date) - new Date(b.Date));
+
+            // Extract data for charts
+            const dates = sortedItems.map(item => item.Date);
+            const newUsers = sortedItems.map(item => item.NewUsers);
+            const activeUsers = sortedItems.map(item => item.ActiveUsers);
+            const eventsPerUser = sortedItems.map(item => item.EventsPerUser);
+            const sessionPerUser = sortedItems.map(item => item.SessionsPerUser);
+            const eventsPerSession = sortedItems.map(item => item.EventsPerSession);
+            const pageViewsPerUser = sortedItems.map(item => {
+                if (!item.ActiveUsers || item.ActiveUsers === 0) return 0;
+                return +(item.ScreenPageViews / item.ActiveUsers).toFixed(2);
+            });
+            const bounceRates = sortedItems.map(item => (item.BounceRate * 100).toFixed(2));
+            const engagementRates = sortedItems.map(item => (item.EngagementRate * 100).toFixed(2));
+
+            // Update charts
+            updateNewUsersChart(dates, newUsers);
+            updateActiveUsersChart(dates, activeUsers);
+            updateEventsPerUserChart(dates, eventsPerUser);
+            updateSessionsPerUserChart(dates, sessionPerUser);
+            updateEventsPerSessionChart(dates, eventsPerSession);
+            updatePageViewsPerUserChart(dates, pageViewsPerUser);
+            updateBounceRateChart(dates, bounceRates, engagementRates);
+            // Update tables
+            updateNewUsersTable(sortedItems);
+            updateActiveUsersTable(sortedItems);
+            updateEventsPerUserTable(sortedItems);
+            updateEventsPerSessionTable(sortedItems);
+            updatePageViewsPerUserTable(sortedItems);
+            updateBounceRateTable(sortedItems);
+            updateSessionPerUserTable(sortedItems);
+
+        }
+
+        // Analytics Chart
+        function updatePageTitleAnalyticsTable(data) {
+            const tbody = document.querySelector('#pageTitleAnalyticsTable tbody');
+            tbody.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Không có dữ liệu</td></tr>';
+                return;
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="text-align:left;">${item.PageTitle}</td>
+                    <td>${item.ScreenPageViews}</td>
+                    <td>${item.ActiveUsers}</td>
+                    <td>${item.ViewsPerUser.toFixed(2)}</td>
+                    <td>${(item.UserEngagementDuration / item.ActiveUsers).toFixed(1)}</td>
+                    <td>${item.EventCount}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateActiveUsersPerCityChart(data) {
+            // Chart
+            const ctx = document.getElementById('activeUsersPerCityChart').getContext('2d');
+            if (activeUsersPerCityChart) {
+                activeUsersPerCityChart.destroy();
+            }
+
+            // Prepare data for chart
+            const cities = data && data.length ? data.map(item => item.City) : [];
+            const activeUsers = data && data.length ? data.map(item => item.ActiveUsers) : [];
+
+            activeUsersPerCityChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: cities,
+                    datasets: [{
+                        label: 'Người dùng đang hoạt động',
+                        data: activeUsers,
+                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `Người dùng: ${context.raw.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Table
+            const tbody = document.querySelector('#activeUsersPerCityTable tbody');
+            tbody.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="2" style="text-align: center;">Không có dữ liệu người dùng</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${item.City}</td>
+            <td>${item.ActiveUsers}</td>
+        `;
+                tbody.appendChild(row);
+            });
+        }
+
+
+        function updateNewUsersChart(dates, newUsers) {
+            const ctx = document.getElementById('newUsersChart').getContext('2d');
+
+            if (newUsersChart) {
+                newUsersChart.destroy();
+            }
+
+            newUsersChart = new Chart(ctx, {
+                type: 'bar', // chuyển từ 'line' sang 'bar'
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Người dùng mới',
+                        data: newUsers,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.raw.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateActiveUsersChart(dates, activeUsers) {
+            const ctx = document.getElementById('activeUsersChart').getContext('2d');
+
+            if (activeUsersChart) {
+                activeUsersChart.destroy();
+            }
+
+            activeUsersChart = new Chart(ctx, {
+                type: 'bar', // chuyển từ 'line' sang 'bar'
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Người dùng đang hoạt động',
+                        data: activeUsers,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)', // giống eventsPerUserChart
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.raw.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateEventsPerUserChart(dates, eventsPerUser) {
+            const ctx = document.getElementById('eventsPerUserChart').getContext('2d');
+
+            if (eventsPerUserChart) {
+                eventsPerUserChart.destroy();
+            }
+
+            eventsPerUserChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Sự kiện trên mỗi người dùng',
+                        data: eventsPerUser,
+                        borderWidth: 2,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.raw.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateSessionsPerUserChart(dates, sessionsPerUser) {
+            const ctx = document.getElementById('sessionsPerUserChart').getContext('2d');
+
+            if (sessionsPerUserChart) {
+                sessionsPerUserChart.destroy();
+            }
+
+            sessionsPerUserChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Số lượng phiên trên mỗi người dùng',
+                        data: sessionsPerUser,
+                        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                        borderColor: 'rgba(255, 203, 60, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.raw.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateEventsPerSessionChart(dates, eventsPerSession) {
+            const ctx = document.getElementById('eventsPerSessionChart').getContext('2d');
+
+            if (eventsPerSessionChart) {
+                eventsPerSessionChart.destroy();
+            }
+
+            eventsPerSessionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Sự kiện trên mỗi phiên',
+                        data: eventsPerSession,
+                        backgroundColor: 'rgba(255, 150, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 2,
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.raw.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updatePageViewsPerUserChart(dates, pageViewsPerUser) {
+            const ctx = document.getElementById('pageViewsPerUserChart').getContext('2d');
+
+            if (pageViewsPerUserChart) {
+                pageViewsPerUserChart.destroy();
+            }
+
+            pageViewsPerUserChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Lượt xem trên mỗi người dùng',
+                        data: pageViewsPerUser,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.raw.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateBounceRateChart(dates, bounceRates, engagementRates) {
+            const ctx = document.getElementById('bounceRateChart').getContext('2d');
+
+            if (bounceRateChart) {
+                bounceRateChart.destroy();
+            }
+
+            bounceRateChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        { label: 'Tỷ lệ thoát (%)', data: bounceRates, backgroundColor: 'rgba(255, 99, 132, 0.6)' },
+                        { label: 'Tỷ lệ tương tác (%)', data: engagementRates, backgroundColor: 'rgba(75, 192, 192, 0.6)' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                }
+            });
+        }
+
+        // Analytics Table
+        function updateNewUsersTable(data) {
+
+            const tbody = document.querySelector('#newUsersTable tbody');
+            tbody.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="2" style="text-align: center;">Không có dữ liệu người dùng</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML =
+                    `
+                                  <td>${item.Date}</td>
+                                  <td>${item.NewUsers}</td>
+                                  `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateActiveUsersTable(data) {
+            const tbody = document.querySelector('#activeUsersTable tbody');
+            tbody.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="2" style="text-align: center;">Không có dữ liệu người dùng</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                                    <td>${item.Date}</td>
+                                    <td>${item.ActiveUsers}</td>
+                                     `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateEventsPerUserTable(data) {
+            const tbody = document.querySelector('#eventsPerUserTable tbody');
+            tbody.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="2" style="text-align: center;">Không có dữ liệu người dùng</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                         <td>${item.Date}</td>
+                         <td>${item.EventsPerUser.toFixed(2)}</td>
+                                     `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateSessionPerUserTable(data) {
+            const tbody = document.querySelector('#sessionPerUserTable tbody');
+            tbody.innerHTML = '';
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="2" style="text-align: center;">Không có dữ liệu người dùng</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                                                                <td>${item.Date}</td>
+                                                                <td>${item.SessionsPerUser.toFixed(2)}</td>
+                                                            `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateEventsPerSessionTable(data) {
+            const tbody = document.querySelector('#eventsPerSessionTable tbody');
+            tbody.innerHTML = '';
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="2" style="text-align: center;">Không có dữ liệu người dùng</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                                                        <td>${item.Date}</td>
+                                                        <td>${item.EventsPerSession.toFixed(2)}</td>
+                                                    `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updatePageViewsPerUserTable(data) {
+            const tbody = document.querySelector('#pageViewsPerUserTable tbody');
+            tbody.innerHTML = '';
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="2" style="text-align: center;">Không có dữ liệu người dùng</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+
+                let pageViewsPerUser = 0;
+                if (item.ActiveUsers && item.ActiveUsers !== 0) {
+                    pageViewsPerUser = (item.ScreenPageViews / item.ActiveUsers).toFixed(2);
+                }
+
+                row.innerHTML = `
+                                                    <td>${item.Date}</td>
+                                                    <td>${pageViewsPerUser}</td>
+                                                `;
+
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateBounceRateTable(data) {
+            const tbody = document.querySelector('#bounceRateTable tbody');
+            tbody.innerHTML = '';
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="3" style="text-align: center;">Không có dữ liệu người dùng</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                                    <td>${item.Date}</td>
+                                    <td>${(item.BounceRate * 100).toFixed(2)}%</td>
+                                    <td>${(item.EngagementRate * 100).toFixed(2)}%</td>
+                                    `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Search Console Functions
+        async function loadSearchConsoleData() {
+            try {
+                const range = document.getElementById('searchConsoleDateRangeSelect').value;
+
+                const today = new Date();
+                let startDateObj;
+                let endDateObj;
+
+                switch (range) {
+                    case "last_7_days":
+                        endDateObj = new Date(today);
+                        endDateObj.setDate(today.getDate() - 2); // hôm nay - 2 ngày
+
+                        startDateObj = new Date(endDateObj);
+                        startDateObj.setDate(endDateObj.getDate() - 6); // tổng 7 ngày
+                        break;
+
+                    case "last_28_days":
+                        endDateObj = new Date(today);
+                        endDateObj.setDate(today.getDate() - 2);
+
+                        startDateObj = new Date(endDateObj);
+                        startDateObj.setDate(endDateObj.getDate() - 27);
+                        break;
+
+                    case "last_3_months":
+                        endDateObj = new Date(today);
+                        endDateObj.setDate(today.getDate() - 2);
+
+                        startDateObj = new Date(endDateObj);
+                        startDateObj.setMonth(endDateObj.getMonth() - 3);
+                        break;
+
+                    default:
+                        throw new Error('Mốc thời gian không hợp lệ.');
+                }
+
+                function formatDateToLocal(date) {
+                    return date.toLocaleDateString('en-CA'); // trả về yyyy-mm-dd theo local time
+                }
+
+                const startDate = formatDateToLocal(startDateObj);
+                const endDate = formatDateToLocal(endDateObj);
+                _startDate = startDate;
+                _endDate = endDate;
+                // Hiện trạng thái nút đang load data
+                document.getElementById('loadSearchConsoleDataBtn').textContent = 'Đang tải...';
+                document.getElementById('loadSearchConsoleDataBtn').disabled = true;
+
+
+                const response = await chrome.webview.postMessage(JSON.stringify({
+                    type: 'searchConsole',
+                    startDate: startDate,
+                    endDate: endDate,
+                    typeDate: range
+                }));
+
+                // For page performance data
+                const performanceResponse = await chrome.webview.postMessage(JSON.stringify({
+                    type: 'pagePerformance',
+                    startDate: startDate,
+                    endDate: endDate
+                }));
+
+            } catch (error) {
+                console.error('Error loading search console data:', error);
+                alert('Lỗi khi tải dữ liệu Search Console: ' + error.message);
+            } finally {
+                // Hiện trạng thái nút đã tải xong
+                document.getElementById('loadSearchConsoleDataBtn').textContent = 'Thu thập dữ liệu phân tích';
+                document.getElementById('loadSearchConsoleDataBtn').disabled = false;
+            }
+        }
+
+        function updateSearchConsoleDashboard(data) {
+            console.log("Dữ liệu bảng hiệu suất nhận được từ API:", data);
+
+            // Sắp xếp lại dữ liệu theo ngày
+            const sortedItems = [...data].sort((a, b) => new Date(a.Date) - new Date(b.Date));
+
+            // Chuyển đổi chuỗi ngày thành đối tượng Date
+            const dates = sortedItems.map(item => item.Date.split('T')[0]); // Giữ nguyên dạng 'YYYY-MM-DD'
+            const clicks = sortedItems.map(item => item.Clicks);
+            const impressions = sortedItems.map(item => item.Impressions);
+            const ctr = sortedItems.map(item => item.Ctr);
+            const position = sortedItems.map(item => item.AvgPosition);
+
+
+            updateHieuSuatChart(dates, clicks, impressions, ctr, position);
+            updateHieusuatTable(sortedItems);
+        }
+
+        // Hiệu suất chart
+        function updateHieuSuatChart(dates, clicks, impressions, ctr, position) {
+            const ctx = document.getElementById('hieusuatChart').getContext('2d');
+            if (!ctx) {
+                console.error("Không thể lấy canvas context!");
+                return;
+            }
+
+            if (hieusuatChart) {
+                hieusuatChart.destroy();
+            }
+
+            hieusuatChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: 'Lượt nhấp',
+                            data: clicks,
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)'
+                        },
+                        {
+                            label: 'Lượt hiển thị',
+                            data: impressions,
+                            backgroundColor: 'rgba(153, 102, 255, 0.7)'
+                        },
+                        {
+                            label: 'CTR trung bình (%)',
+                            data: ctr,
+                            backgroundColor: 'rgba(255, 159, 64, 0.7)'
+                        },
+                        {
+                            label: 'Vị trí trung bình',
+                            data: position,
+                            backgroundColor: 'rgba(255, 99, 132, 0.7)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'day',
+                                tooltipFormat: 'yyyy-MM-dd'
+                            },
+                            stacked: false
+                        },
+                        y: {
+                            beginAtZero: true,
+                            stacked: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Hiệu suất table
+        let latestSearchConsoleData = null;
+        function updateHieusuatTable(data) {
+            const tbody = document.querySelector('#hieusuatTable tbody');
+            tbody.innerHTML = '';  // Xóa nội dung bảng cũ
+
+            latestSearchConsoleData = data || [];
+            if (!data || data.length === 0) {
+                console.log("Không có dữ liệu, thêm dòng thông báo vào bảng...");
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="5" style="text-align: center;">Không có dữ liệu hiệu suất</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                                    <td>${item.Date.split('T')[0]}</td>
+                                    <td>${item.Clicks ?? 0}</td>
+                                    <td>${item.Impressions ?? 0}</td>
+                                    <td>${(item.Ctr ?? 0).toFixed(2)}</td>
+                                    <td>${(item.AvgPosition ?? 0).toFixed(2)}</td>
+                                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        //lưu vị trí các từ khóa
+        document.getElementById("exportOldPosition").addEventListener("click", function () {
+            window.chrome?.webview.postMessage(JSON.stringify({
+
+                type: 'exportOldPosition',
+                startDate: _startDate,
+                endDate: _endDate,
+                typeDate: document.getElementById('searchConsoleDateRangeSelect').value
+            }));
+        });
+
+        // Xuất dữ liệu Excel cho bảng từ khóa
+        document.getElementById("exportExcelBtn").addEventListener("click", function () {
+            const table = document.getElementById("combinedTable");
+            const rows = Array.from(table.querySelectorAll("tbody tr"));
+            if (rows.length === 0) {
+                alert("Không có dữ liệu từ khóa.");
+                return;
+            }
+            const data = rows.map(row => {
+                const cells = row.querySelectorAll("td");
+                return {
+                    "Từ khóa": cells[0].textContent.trim(),
+                    "Đề Xuất Từ Khóa Cải Thiện": cells[7].innerText.trim() // Giữ xuống dòng
+                };
+            });
+
+            const worksheet = XLSX.utils.json_to_sheet(data);
+
+            // Tự động điều chỉnh độ rộng cột
+            const colWidths = Object.keys(data[0]).map((key) => {
+                const maxLength = Math.max(
+                    key.length,
+                    ...data.map(row => (row[key] ? row[key].length : 0))
+                );
+                return { wch: maxLength + 1 };
+            });
+            worksheet["!cols"] = colWidths;
+
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Từ Khóa");
+            XLSX.writeFile(workbook, "tu-khoa-1.xlsx");
+        });
+
+
+        //Bảng từ khóa
+        let latestCombinedData = null;
+        let sortClicksAscending = false;     // Trạng thái sắp xếp (true = tăng dần, false = giảm dần)
+        let sortCTRAscending = false;
+        let sortVitriAscending = false;
+        let sortUsagePercentageAscending = false;
+        function updateCombinedTable(data) {
+            console.log("Dữ liệu từ khoá nhận được từ API:", data);
+            const tbody = document.querySelector('#combinedTable tbody');
+            tbody.innerHTML = ''; // Xóa nội dung cũ
+
+            latestCombinedData = data || [];
+            if (!data || data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="10">Không có dữ liệu</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+            const topKeywords = data.slice(0, 1000);
+            // Tìm giá trị Clicks lớn nhất để scale màu
+            const maxClicks = Math.max(...topKeywords.map(item => item.Clicks));
+
+            topKeywords.forEach(item => {
+                const row = document.createElement('tr');
+
+                // Ô từ khóa
+                const keywordCell = document.createElement('td');
+                keywordCell.textContent = item.Keyword;
+
+                // Ô lượt nhấp với màu nền theo giá trị
+                const clicksCell = document.createElement('td');
+                clicksCell.textContent = item.Clicks;
+
+                let bgColor;
+                if (item.Clicks === 0) {
+                    bgColor = 'rgb(255, 120, 120)'; // đỏ
+                } else {
+                    const intensity = item.Clicks / maxClicks;
+                    const green = Math.round(200 + intensity * 55);
+                    const red = Math.round(220 - intensity * 80);
+                    bgColor = `rgb(${red}, ${green}, 150)`;
+                }
+                clicksCell.style.backgroundColor = bgColor;
+
+                // Các ô còn lại
+                const impressionsCell = document.createElement('td');
+                impressionsCell.textContent = item.Impressions;
+
+                const ctrCell = document.createElement('td');
+                function formatCTR(value) {
+                    let rounded = parseFloat(value).toFixed(1);
+                    return (rounded % 1 === 0) ? parseInt(rounded) + '%' : rounded + '%';
+                }
+                ctrCell.textContent = formatCTR(item.Ctr);
+
+                const positionCell = document.createElement('td');
+                const avgPosition = parseFloat(item.AvgPosition.toFixed(1));
+                const oldAvgPosition = parseFloat(item.OldAvgPosition.toFixed(1));
+
+                //if (item.Ctr === 0 && item.AvgPosition.toFixed(1) == 1.0) {
+                //    positionCell.textContent = "Chưa xác định";
+                //} else
+
+                if (avgPosition < oldAvgPosition) {
+                    positionCell.textContent = avgPosition + " 🔼";
+                } else if (avgPosition > oldAvgPosition) {
+                    positionCell.textContent = avgPosition + " 🔻";
+                } else {
+                    positionCell.textContent = avgPosition + " ➖";
+                }
+                const oldPositionCell = document.createElement('td');
+                if (positionCell.textContent === "Chưa xác định") {
+                    oldPositionCell.textContent = "Chưa xác định";
+                } else {
+                    oldPositionCell.textContent = oldAvgPosition;
+                }
+
+
+                const usagePercentageCell = document.createElement('td');
+                usagePercentageCell.textContent = item.UsagePercentage ? item.UsagePercentage.toFixed(2) + "%" : "0%";
+
+                const pageCountCell = document.createElement('td');
+                pageCountCell.textContent = item.PageCount || 0;
+                // Ô đề xuất từ khóa
+                const suggestionCell = document.createElement('td');
+                suggestionCell.textContent = "Nhấn để lấy đề xuất";
+                suggestionCell.setAttribute("style", `
+                                    background-color: #fffff5;
+                                    padding: 10px;
+                                    font-size: 15px;
+                                    text-align: left;
+                                    line-height: 1.5;
+                                    color: #17202a;
+                                    cursor: pointer;
+                                    white-space: pre-line;
+                                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            `);
+                suggestionCell.addEventListener('click', async () => {
+                    try {
+                        const suggestion = await NewKeyWordsAiSuggestion(
+                            item.Keyword, item.Clicks, item.Impressions, item.Ctr, item.AvgPosition
+                        );
+                        suggestionCell.textContent = suggestion || "Không có đề xuất.";
+                    } catch (error) {
+                        suggestionCell.textContent = "Lỗi khi lấy đề xuất.";
+                    }
+                });
+
+                // Ô gợi ý cải thiện
+                const improvementCell = document.createElement('td');
+                improvementCell.textContent = "Nhấn để lấy gợi ý";
+                improvementCell.setAttribute("style", `
+                                            background-color: #fffff5;
+                                            font-size: 15px;
+                                            text-align: left;
+                                            padding: 10px; /* Thêm padding tổng thể */
+                                            margin: 0; /* Loại bỏ khoảng cách không cần thiết */
+                                            line-height: 1.6; /* Điều chỉnh khoảng cách dòng */
+                                            cursor: pointer;
+                                            color: #17202a;
+                                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                        `);
+
+                improvementCell.addEventListener('click', async () => {
+                    try {
+                        const improvement = await KeyWordsAiSuggestion(
+                            item.Keyword, item.Clicks, item.Impressions, item.Ctr, item.AvgPosition
+                        );
+                        improvementCell.innerHTML = improvement || "Không có gợi ý.";
+                    } catch (error) {
+                        improvementCell.textContent = "Lỗi khi lấy gợi ý.";
+                    }
+                });
+
+
+
+                // Thêm các ô vào hàng
+                row.appendChild(keywordCell);
+                row.appendChild(clicksCell);
+                row.appendChild(impressionsCell);
+                row.appendChild(ctrCell);
+                row.appendChild(positionCell);
+                row.appendChild(pageCountCell);
+                row.appendChild(usagePercentageCell);
+                row.appendChild(suggestionCell);
+                row.appendChild(improvementCell);
+                row.appendChild(oldPositionCell);
+
+                // Thêm hàng vào bảng
+                tbody.appendChild(row);
+            });
+        }
+
+
+        // Sửa lại hàm reset để không xóa class của cột đang active
+        function resetSortButtons(exceptButtonId = null) {
+            document.querySelectorAll('#combinedTable th button').forEach(btn => {
+                if (!exceptButtonId || btn.id !== exceptButtonId) {
+                    btn.classList.remove('asc', 'desc');
+                }
+            });
+        }
+        // Thêm biến để theo dõi trạng thái active
+        let activeSortColumn = null;
+        // Sắp xếp combinedTable
+        document.getElementById('SapXepClickscombinedTable').addEventListener('click', () => { // Sắp xếp Clicks
+            if (!latestCombinedData?.length) return;
+
+            const btn = document.getElementById('SapXepClickscombinedTable');
+            const isActiveColumn = activeSortColumn === 'clicks';
+
+            // Nếu click vào cột khác
+            if (!isActiveColumn) {
+                resetSortButtons('SapXepClickscombinedTable');
+                activeSortColumn = 'clicks';
+                btn.classList.add('desc'); // Mặc định giảm dần
+                sortClicksAscending = false;
+            }
+            // Nếu click vào cột đang active
+            else {
+                sortClicksAscending = !sortClicksAscending;
+                btn.classList.toggle('desc', !sortClicksAscending);
+                btn.classList.toggle('asc', sortClicksAscending);
+            }
+
+            latestCombinedData.sort((a, b) => {
+                return sortClicksAscending ? a.Clicks - b.Clicks : b.Clicks - a.Clicks;
+            });
+            updateCombinedTable(latestCombinedData);
+        });
+
+        document.getElementById('SapXepCTRcombinedTable').addEventListener('click', () => { // Sắp xếp CTR
+            if (!latestCombinedData?.length) return;
+
+            const btn = document.getElementById('SapXepCTRcombinedTable');
+            const isActiveColumn = activeSortColumn === 'ctr';
+
+            if (!isActiveColumn) {
+                resetSortButtons('SapXepCTRcombinedTable');
+                activeSortColumn = 'ctr';
+                btn.classList.add('desc');
+                sortCTRAscending = false;
+            } else {
+                sortCTRAscending = !sortCTRAscending;
+                btn.classList.toggle('desc', !sortCTRAscending);
+                btn.classList.toggle('asc', sortCTRAscending);
+            }
+
+            latestCombinedData.sort((a, b) => {
+                const ctrA = parseFloat(a.Ctr.toFixed(2));
+                const ctrB = parseFloat(b.Ctr.toFixed(2));
+                return sortCTRAscending ? ctrA - ctrB : ctrB - ctrA;
+            });
+            updateCombinedTable(latestCombinedData);
+        });
+
+        document.getElementById('SapXepVitricombinedTable').addEventListener('click', () => { // Sắp xếp Vị trí
+            if (!latestCombinedData?.length) return;
+
+            const btn = document.getElementById('SapXepVitricombinedTable');
+            const isActiveColumn = activeSortColumn === 'position';
+
+            if (!isActiveColumn) {
+                resetSortButtons('SapXepVitricombinedTable');
+                activeSortColumn = 'position';
+                btn.classList.add('desc'); // Mặc định GIẢM DẦN
+                sortPositionAscending = false;
+            } else {
+                sortPositionAscending = !sortPositionAscending;
+                btn.classList.toggle('desc', !sortPositionAscending);
+                btn.classList.toggle('asc', sortPositionAscending);
+            }
+
+            // Vị trí THẤP (gần top 1) là TỐT hơn
+            latestCombinedData.sort((a, b) => {
+                // Kiểm tra nếu từ khóa `a` hoặc `b` có Clicks = 0 và AvgPosition = 1
+                const isAUndefined = a.Clicks === 0 && a.AvgPosition === 1;
+                const isBUndefined = b.Clicks === 0 && b.AvgPosition === 1;
+
+                // Nếu `a` là "Chưa xác định", xếp `a` xuống dưới
+                if (isAUndefined && !isBUndefined) {
+                    return 1;
+                }
+                // Nếu `b` là "Chưa xác định", xếp `b` xuống dưới
+                if (isBUndefined && !isAUndefined) {
+                    return -1;
+                }
+
+                return sortPositionAscending
+                    ? b.AvgPosition - a.AvgPosition // TĂNG DẦN (1 → 10)
+                    : a.AvgPosition - b.AvgPosition; // GIẢM DẦN (10 → 1)
+            });
+
+
+            updateCombinedTable(latestCombinedData);
+        });
+
+        // Sắp xếp theo tỉ lệ phần trăm sử dụng
+        document.getElementById('SapXepTilecombinedTable').addEventListener('click', () => {
+            if (!latestCombinedData?.length) return;
+
+            const btn = document.getElementById('SapXepTilecombinedTable');
+            const isActiveColumn = activeSortColumn === 'usagePercentage';
+
+            if (!isActiveColumn) {
+                resetSortButtons('SapXepTilecombinedTable');
+                activeSortColumn = 'usagePercentage';
+                btn.classList.add('desc');
+                sortUsagePercentageAscending = false;
+            }
+            else {
+                sortUsagePercentageAscending = !sortUsagePercentageAscending;
+                btn.classList.toggle('desc', !sortUsagePercentageAscending);
+                btn.classList.toggle('asc', sortUsagePercentageAscending);
+            }
+
+            latestCombinedData.sort((a, b) => {
+                const usageA = a.UsagePercentage || 0;
+                const usageB = b.UsagePercentage || 0;
+                return sortUsagePercentageAscending ? usageA - usageB : usageB - usageA;
+            });
+
+            updateCombinedTable(latestCombinedData);
+        });
+
+
+
+        let latestPerformanceData = null;
+        let performanceSortClicks = false; // false = giảm dần, true = tăng dần
+        let performanceSortCTR = false;
+        let performanceSortPosition = false;
+
+        // Hàm cập nhật bảng Hiệu suất từng trang
+        function updatePerformanceTable(data, isLoading = false) {
+            const tbody = document.querySelector('#performanceTable tbody');
+            tbody.innerHTML = '';
+            console.log("Dữ liệu hiệu suất từng trang nhận được từ API:", data);
+            latestPerformanceData = data || [];
+            if (isLoading) {
+                tbody.innerHTML = '<tr><td colspan="5">Đang tải dữ liệu, vui lòng chờ...</td></tr>';
+                return;
+            }
+
+            // Trường hợp không có dữ liệu
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5">Không có dữ liệu</td></tr>';
+                return;
+            }
+            function formatCTR(value) {
+                let rounded = parseFloat(value).toFixed(1);
+                return (rounded % 1 === 0) ? parseInt(rounded) + '%' : rounded + '%';
+            }
+            // CHỈ sắp xếp mặc định nếu chưa có cột nào được chọn
+            if (!activePerformanceSort) {
+                data.sort((a, b) => {
+                    if (b.Clicks !== a.Clicks) return b.Clicks - a.Clicks;
+                    return b.Impressions - a.Impressions;
+                });
+            }
+
+            data.slice(0, 1000).forEach(item => {
+                const row = document.createElement('tr');
+                const pageCellColor = item.KeywordsCount === 0 ? 'style="color: red;"' : '';
+
+                row.innerHTML = `
+                                                    <td class="click-page"${pageCellColor}>${item.Page}</td>
+                                                    <td>${item.Clicks}</td>
+                                                    <td>${item.Impressions}</td>
+                                                    <td>${formatCTR(item.Ctr)}</td>
+                                                    <td>${item.AvgPosition.toFixed(1)}</td>
+                                                                 `;
+                row.querySelector('.click-page').addEventListener('click', () => {
+                    chrome.webview.postMessage(JSON.stringify({
+                        type: 'getKeywordsForPage',
+                        page: item.Page,
+                        pageClicks: item.Clicks,
+                        pageImpressions: item.Impressions,
+                        pageCtr: item.Ctr,
+                        pageAvgPosition: item.AvgPosition,
+                        startDate: item.StartDate,
+                        endDate: item.EndDate
+                    }));
+                });
+                tbody.appendChild(row);
+            });
+        }
+
+        // Sắp xếp performaceTable
+        // Hàm reset các nút sắp xếp
+        function resetPerformanceSortButtons() {
+            document.querySelectorAll('#performanceTable th button').forEach(btn => {
+                btn.classList.remove('asc', 'desc');
+            });
+        }
+        let activePerformanceSort = null; // 'clicks' | 'ctr' | 'position'
+        // Sắp xếp Lượt nhấp Hiệu suất từng trang
+        document.getElementById('SapXepClicksperformanceTable').addEventListener('click', () => {
+            if (!latestPerformanceData?.length) return;
+
+            resetPerformanceSortButtons();
+
+            // Nếu click vào cột khác
+            if (activePerformanceSort !== 'clicks') {
+                activePerformanceSort = 'clicks';
+                performanceSortClicks = false; // Mặc định giảm dần
+            }
+            // Nếu click lại vào cột đang active
+            else {
+                performanceSortClicks = !performanceSortClicks;
+            }
+
+            const btn = document.getElementById('SapXepClicksperformanceTable');
+            btn.classList.add(performanceSortClicks ? 'asc' : 'desc');
+
+            latestPerformanceData.sort((a, b) =>
+                performanceSortClicks ? a.Clicks - b.Clicks : b.Clicks - a.Clicks
+            );
+
+            updatePerformanceTable(latestPerformanceData);
+        });
+
+        // Sắp xếp CTR Hiệu suất từng trang
+        document.getElementById('SapXepCTRperformanceTable').addEventListener('click', () => {
+            if (!latestPerformanceData?.length) return;
+
+            resetPerformanceSortButtons();
+
+            if (activePerformanceSort !== 'ctr') {
+                activePerformanceSort = 'ctr';
+                performanceSortCTR = false;
+            } else {
+                performanceSortCTR = !performanceSortCTR;
+            }
+
+            const btn = document.getElementById('SapXepCTRperformanceTable');
+            btn.classList.add(performanceSortCTR ? 'asc' : 'desc');
+
+            latestPerformanceData.sort((a, b) => {
+                const ctrA = parseFloat(a.Ctr);
+                const ctrB = parseFloat(b.Ctr);
+                return performanceSortCTR ? ctrA - ctrB : ctrB - ctrA;
+            });
+
+            updatePerformanceTable(latestPerformanceData);
+        });
+
+        // Sắp xếp vị trí Hiệu suất từng trang
+        document.getElementById('SapXepVitriperformanceTable').addEventListener('click', () => {
+            if (!latestPerformanceData?.length) return;
+
+            resetPerformanceSortButtons();
+
+            if (activePerformanceSort !== 'position') {
+                activePerformanceSort = 'position';
+                performanceSortPosition = false;
+            } else {
+                performanceSortPosition = !performanceSortPosition;
+            }
+
+            const btn = document.getElementById('SapXepVitriperformanceTable');
+            btn.classList.add(performanceSortPosition ? 'asc' : 'desc');
+
+            latestPerformanceData.sort((a, b) =>
+                performanceSortPosition ?
+                    b.AvgPosition - a.AvgPosition : //  Giảm dần (10 → 1)
+                    a.AvgPosition - b.AvgPosition   //  Tăng dần (1 → 10)
+            );
+
+            updatePerformanceTable(latestPerformanceData);
+        });
+        // Bảng đánh giá trang
+        function updateDanhGiaTable(data) {
+            const tbody = document.querySelector('#danhgiatable tbody');
+            tbody.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                // Nếu không có dữ liệu, hiển thị thông báo với colspan=6 (vì có 6 cột)
+
+                tbody.innerHTML = '<tr><td colspan="7">Chưa có đánh giá</td></tr>';
+                return;
+            }
+
+            // Lấy Page từ item đầu tiên
+            const page = data[0]?.Page
+
+            // Duyệt qua các item và chỉ hiển thị Page một lần
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+
+                // Nếu là phần tử đầu tiên của nhóm từ khóa, hiển thị Page
+                if (index === 0) {
+                    row.innerHTML = `
+                                            <td style="color:#0000EE" rowspan="${data.length}">${page}</td> <!-- Hiển thị Page chỉ 1 lần với rowspan -->
+                                            <td>${item.Keyword}</td>
+                                            <td>${item.Clicks}</td>
+                                            <td>${item.Impressions}</td>
+                                            <td>${item.Ctr.toFixed(2)}</td>
+                                            <td>${item.AvgPosition.toFixed(1)}</td>
+                                            <td style="color:#FF0000" rowspan="${data.length}"><strong>Đánh giá:</strong> ${item.DanhGia}<br></br><strong>Hành động:</strong> ${item.HanhDongDeXuat}</td>
+                                        `;
+                } else {
+                    row.innerHTML = `
+                                            <td>${item.Keyword}</td>
+                                            <td>${item.Clicks}</td>
+                                            <td>${item.Impressions}</td>
+                                            <td>${item.Ctr.toFixed(2)}</td>
+                                            <td>${item.AvgPosition.toFixed(1)}</td>
+                                        `;
+                }
+                tbody.appendChild(row);
+            });
+        }
+
+        // Nhấn chat button để mở và đóng chat box
+        document.getElementById("chatButton").addEventListener("click", function () {
+            const chatBox = document.getElementById("chatBox");
+            if (chatBox.classList.contains("hidden")) {
+                chatBox.classList.remove("hidden");
+                chatBox.classList.add("visible");
+            } else {
+                chatBox.classList.remove("visible");
+                chatBox.classList.add("hidden");
+            }
+        });
+        // Nhấn x để đóng chatbox
+        document.getElementById("closeChat").addEventListener("click", function () {
+            const chatBox = document.getElementById("chatBox");
+            chatBox.classList.remove("visible");
+            chatBox.classList.add("hidden");
+        });
+
+        document.getElementById("sendMessage").addEventListener("click", async function () {
+            await sendMessage();
+        });
+
+        document.getElementById("userMessage").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        // Gửi tin nhắn đến AI
+        async function sendMessage() {
+            let inputField = document.getElementById("userMessage");
+            let message = inputField.value.trim();
+            let chatContent = document.getElementById("chatContent");
+
+            if (message === "") return;
+
+
+            let userMessageDiv = document.createElement("div");
+            userMessageDiv.className = "message user-message";
+            userMessageDiv.innerText = message;
+            chatContent.appendChild(userMessageDiv);
+            inputField.value = "";
+
+            let aiMessageDiv = document.createElement("div");
+            aiMessageDiv.className = "message ai-message";
+            aiMessageDiv.innerText = "⏳ AI đang suy nghĩ...";
+            chatContent.appendChild(aiMessageDiv);
+
+            try {
+                let prompt;
+
+                if (message.toLowerCase() === "phân tích seo analytics" && latestAnalyticsData) {
+                    prompt = createSeoAnalysisPrompt(latestAnalyticsData);
+                } else if (message.toLowerCase() === "phân tích seo search console" && latestSearchConsoleData) {
+                    prompt = createSeoSearchConsolePrompt(latestSearchConsoleData);
+                } else {
+                    prompt = message;
+                    chatContent.scrollTop = chatContent.scrollHeight;
+                }
+
+                // Gọi API Gemini
+                let response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDNoJKiWOsNg2vwlilVGt8YRRVpIqVoKpE", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+
+                let data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(`❌ Lỗi API: ${response.status} - ${data.error?.message || "Không rõ nguyên nhân"}`);
+                }
+
+                let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ AI không thể trả lời ngay lúc này.";
+
+                if (message.toLowerCase().includes("phân tích seo analytics") || message.toLowerCase().includes("phân tích seo search console")) {
+                    displaySeoAnalysis(reply);
+                    aiMessageDiv.remove();
+                } else {
+                    aiMessageDiv.innerHTML = marked.parse(reply);
+                }
+
+            } catch (error) {
+                aiMessageDiv.innerText = "❌ AI không thể trả lời ngay lúc này! Kiểm tra API Key hoặc mạng và thử lại.";
+                displaySeoAnalysis("❌ AI không thể trả lời ngay lúc này! Kiểm tra API Key hoặc mạng và thử lại.");
+                console.error("Lỗi khi gọi API Gemini:", error);
+            }
+
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+
+        // Tạo prompt cho phân tích SEO từ Google Analytics
+        function createSeoAnalysisPrompt(data) {
+            if (!data || !data.Items || data.Items.length === 0) {
+                return "Không có dữ liệu để phân tích.";
+            }
+
+            let prompt = `Phân tích hiệu quả SEO dựa trên dữ liệu Google Analytics:\n\n`;
+
+            const sortedItems = [...data.Items].sort((a, b) => new Date(a.Date) - new Date(b.Date));
+            const metrics = [
+                { key: 'NewUsers', label: 'Người dùng mới' },
+                { key: 'ActiveUsers', label: 'Người dùng đang hoạt động' },
+                { key: 'EventsPerUser', label: 'Sự kiện mỗi người dùng' },
+                { key: 'SessionsPerUser', label: 'Phiên mỗi người dùng' },
+                { key: 'EventsPerSession', label: 'Sự kiện mỗi phiên' },
+                { key: 'ScreenPageViews', label: 'Lượt xem trang' },
+                { key: 'BounceRate', label: 'Tỷ lệ thoát' },
+                { key: 'EngagementRate', label: 'Tỷ lệ tương tác' }
+            ];
+
+            sortedItems.forEach(item => {
+                prompt += `📅 Ngày: ${item.Date}\n`;
+                metrics.forEach(metric => {
+
+                    let value = item[metric.key];
+
+                    // Nếu là pageViews per user, tính toán riêng
+                    if (metric.key === 'ScreenPageViews') {
+                        value = item.ActiveUsers ? (item.ScreenPageViews / item.ActiveUsers).toFixed(2) : 0;
+                        prompt += `- ${metric.label} / Người dùng: ${value}\n`;
+                    } else if (metric.key === 'BounceRate' || metric.key === 'EngagementRate') {
+                        value = value ? ((value * 100).toFixed(2)) : 0;
+                        prompt += `- ${metric.label}: ${value}%\n`;
+                    }
+                    else {
+                        prompt += `- ${metric.label}: ${value ?? 0}\n`;
+                    }
+                });
+                prompt += '\n';
+            });
+
+            prompt += `Vui lòng đánh giá và cung cấp:\n`;
+            prompt += '1Liệt kê khoảng thời gian cần đánh giá'
+            prompt += `2. Các điểm mạnh của SEO hiện tại\n`;
+            prompt += `3. Các điểm yếu cần cải thiện\n`;
+            prompt += `4. Đánh giá tổng quan ngắn gọn về hiệu suất SEO\n`;
+            return prompt;
+        }
+        // Tạo prompt cho phân tích SEO từ Search Console
+        function createSeoSearchConsolePrompt() {
+            if (!latestSearchConsoleData || latestSearchConsoleData.length === 0) {
+                return 'Không có dữ liệu hiệu suất theo ngày để phân tích SEO.';
+            }
+
+            const sorted = [...latestSearchConsoleData].sort((a, b) => new Date(a.Date) - new Date(b.Date));
+
+            const dailyStats = sorted.map(item => {
+                return `${item.Date.split('T')[0]} — Clicks: ${item.Clicks}, Impressions: ${item.Impressions}, CTR: ${item.Ctr.toFixed(2)}%, Vị trí TB: ${item.AvgPosition.toFixed(1)}`;
+            }).join('\n');
+
+            const prompt = `
+                                                Phân tích hiệu suất SEO từ Google Search Console:
+                                                ${dailyStats}
+
+                                                Thực hiện:
+                                                1. Liệt kê và phân tích xu hướng hiệu suất theo từng ngày
+                                                2. Tính tổng lượt nhấp và lượt hiển thị, tính tổng trung bình ctr và vị trí
+                                                2. Nhận xét giai đoạn nào hiệu quả/kém hiệu quả, cần cải thiện
+                                                3. Gợi ý chiến lược tối ưu SEO cho giai đoạn tới
+                                                4. Phân tích, giải thích ngắn gọn dễ hiểu, tập trung vào những điểm quan trọng.
+                                                    `.trim();
+            return prompt;
+        }
+        // Tạo prompt cho gợi ý từ khoá cải thiện
+        async function NewKeyWordsAiSuggestion(keyword, clicks, impressions, ctr, avgPosition) { //item.Keyword, item.Clicks, item.Impressions, item.Ctr, item.AvgPosition
+            const prompt = `Dựa vào từ khóa sau hãy đề xuất 5 từ khóa mới phù hợp với các tiêu chí sau:
+                                                1. Lượt tìm kiếm hàng tháng
+                                                2. Độ cạnh tranh
+                                                3. Mục đích tìm kiếm
+                                                4. Xu hướng tìm kiếm
+                                                5. Khả năng mở rộng từ khóa
+                                                6. Độ phù hợp với sản phẩm
+                                                Từ khóa đầu vào: ${keyword} với ${clicks} lượt nhấp, ${impressions} lượt hiển thị, CTR trung bình ${ctr} và vị trí trung bình ${avgPosition}.
+                                                Yêu cầu đầu ra: Chỉ liệt kê 5 từ khóa, đánh số thứ tự, không bôi đậm, không giải thích gì thêm.`;
+
+            let aiMessageDiv = document.createElement("div");
+            aiMessageDiv.className = "message ai-message";
+            aiMessageDiv.innerText = "⏳ AI đang suy nghĩ...";
+            document.getElementById("chatContent").appendChild(aiMessageDiv);
+
+            try {
+                let response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDNoJKiWOsNg2vwlilVGt8YRRVpIqVoKpE", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        contents: [
+                            {
+                                parts: [
+                                    {
+                                        text: prompt
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                });
+
+                let data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(`❌ Lỗi API: ${response.status} - ${data.error?.message || "Không rõ nguyên nhân"}`);
+                }
+
+                let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ AI không thể trả lời ngay lúc này.";
+
+                aiMessageDiv.innerText = reply;
+                chatContent.scrollTop = chatContent.scrollHeight;
+
+
+                return reply;
+
+            } catch (error) {
+                aiMessageDiv.innerText = "❌ AI không thể trả lời ngay lúc này! Kiểm tra API Key hoặc mạng và thử lại.";
+                console.error("Lỗi khi gọi API Gemini:", error);
+
+                return "Lỗi khi lấy đề xuất, vui lòng thử lại!.";
+            }
+
+        }
+        // Tạo prompt cho gợi ý cải thiện
+        async function KeyWordsAiSuggestion(keyword, clicks, impressions, ctr, avgPosition) {
+            const prompt = `
+                                Từ khóa đầu vào: ${keyword} với ${clicks} lượt nhấp, ${impressions} lượt hiển thị, CTR trung bình ${ctr} và vị trí trung bình ${avgPosition}.\n
+                                Yêu cầu đầu ra: Dựa trên dữ liệu đầu vào của từ khoá đưa ra các tiêu đề: \n
+                                 1. Đưa ra gợi ý ngắn gọn "nên sử dụng tiếp, thường xuyên hơn" hay "loại bỏ" từ khoá.\n
+                                 2. Nếu nên sử dụng tiếp:\n
+                                     -Gợi ý cách xây dựng bài viết chuẩn SEO cho từ khoá này một cách gắn gọn nhưng đầy đủ\n
+                                 3. Nếu loại bỏ chỉ cần phản hồi "Nên loại bỏ từ khoá"\n
+                                 4. Căn lề trái, không bôi đậm vào câu trả lời, không giải thích gì thêm.\n
+                                `;
+
+            let aiMessageDiv = document.createElement("div");
+            aiMessageDiv.className = "message ai-message";
+            aiMessageDiv.innerText = "⏳ AI đang suy nghĩ...";
+            document.getElementById("chatContent").appendChild(aiMessageDiv);
+
+            try {
+                let response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDNoJKiWOsNg2vwlilVGt8YRRVpIqVoKpE", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        contents: [
+                            {
+                                parts: [
+                                    {
+                                        text: prompt
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                });
+
+                let data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(`❌ Lỗi API: ${response.status} - ${data.error?.message || "Không rõ nguyên nhân"}`);
+                }
+
+                let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ AI không thể trả lời ngay lúc này.";
+                replyAfterMarked = marked.parse(reply);
+                aiMessageDiv.innerHTML = replyAfterMarked;
+                chatContent.scrollTop = chatContent.scrollHeight;
+
+
+                return replyAfterMarked;
+
+            } catch (error) {
+                aiMessageDiv.innerText = "❌ AI không thể trả lời ngay lúc này! Kiểm tra API Key hoặc mạng và thử lại.";
+                console.error("Lỗi khi gọi API Gemini:", error);
+
+
+                return "Lỗi khi lấy gợi ý, vui lòng thử lại!.";
+            }
+
+        }
+
+        // Sự kiến nhấn nút Phân tích SEO
+        document.getElementById("analyzeSeoAnalyticsBtn").addEventListener("click", async function () {
+            if (!latestAnalyticsData || latestAnalyticsData.length === 0) {
+                alert("Chưa có dữ liệu Analytics");
+                return;
+            }
+
+            document.getElementById("userMessage").value = "Phân tích SEO Analytics";
+            await sendMessage();
+        });
+        // Sự kiến nhấn nút Phân tích Google Search Console
+        document.getElementById("analyzeSearchConsleBtn").addEventListener("click", async function () {
+            if (!latestSearchConsoleData || latestSearchConsoleData.length === 0) {
+                alert("Chưa có dữ liệu bảng hiệu suất Search Console");
+                return;
+            }
+
+            document.getElementById("userMessage").value = "Phân tích SEO Search Console";
+            await sendMessage();
+        });
+        // Hiển thị phân tích SEO
+        function displaySeoAnalysis(result) {
+            const recommendationsElement = document.getElementById('seoRecommendations');
+            const analysisContainer = document.getElementById('seoAnalysisResult');
+
+            const htmlContent = marked.parse(result);
+
+            recommendationsElement.innerHTML = htmlContent;
+            recommendationsElement.setAttribute("style", `
+                                                background-color: #fffdf7;
+                                                border: 1px solid #ffd28b;
+                                                padding: 16px;
+                                                border-radius: 10px;
+                                                font-size: 15px;
+                                                line-height: 1.6;
+                                                color: #333;
+                                                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                                                transition: box-shadow 0.3s ease;
+                                                `);
+
+            // Hover effect bằng sự kiện
+            recommendationsElement.onmouseover = function () {
+                this.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.1)";
+            };
+            recommendationsElement.onmouseout = function () {
+                this.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.05)";
+            };
+
+            analysisContainer.style.display = "block";
+        }
+    </script>
+</body>
+</html>

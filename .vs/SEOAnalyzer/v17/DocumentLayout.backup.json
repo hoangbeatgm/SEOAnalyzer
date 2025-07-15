@@ -1,0 +1,132 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|d:\\nguy\u1EC5n v\u0103n ho\u00E0ng anh - ktpm k20a\\seoanalyzer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|d:\\nguy\u1EC5n v\u0103n ho\u00E0ng anh - ktpm k20a\\seoanalyzer\\web\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|solutionrelative:web\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|d:\\nguy\u1EC5n v\u0103n ho\u00E0ng anh - ktpm k20a\\seoanalyzer\\googleanalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|solutionrelative:googleanalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|d:\\nguy\u1EC5n v\u0103n ho\u00E0ng anh - ktpm k20a\\seoanalyzer\\web\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|solutionrelative:web\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|d:\\nguy\u1EC5n v\u0103n ho\u00E0ng anh - ktpm k20a\\seoanalyzer\\googlesearchconsoleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|solutionrelative:googlesearchconsoleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\websitesmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4C30FA2F-1910-46A2-A9FC-3975B5F76B61}|SEOAnalyzer.csproj|solutionrelative:websitesmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAAAH0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T15:35:11.482Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GoogleAnalyticsService.cs",
+              "DocumentMoniker": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\GoogleAnalyticsService.cs",
+              "RelativeDocumentMoniker": "GoogleAnalyticsService.cs",
+              "ToolTip": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\GoogleAnalyticsService.cs",
+              "RelativeToolTip": "GoogleAnalyticsService.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAiwHkAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T09:45:13.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "styles.css",
+              "DocumentMoniker": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\Web\\styles.css",
+              "RelativeDocumentMoniker": "Web\\styles.css",
+              "ToolTip": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\Web\\styles.css",
+              "RelativeToolTip": "Web\\styles.css",
+              "ViewState": "AgIAABoBAAAAAAAAAAAYwDIBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-05-23T16:50:09.037Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "index.html",
+              "DocumentMoniker": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\Web\\index.html",
+              "RelativeDocumentMoniker": "Web\\index.html",
+              "ToolTip": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\Web\\index.html",
+              "RelativeToolTip": "Web\\index.html",
+              "ViewState": "AgIAABEBAAAAAAAAAAAAAB8BAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-06-13T15:10:55.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T19:10:14.648Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GoogleSearchConsoleService.cs",
+              "DocumentMoniker": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\GoogleSearchConsoleService.cs",
+              "RelativeDocumentMoniker": "GoogleSearchConsoleService.cs",
+              "ToolTip": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\GoogleSearchConsoleService.cs",
+              "RelativeToolTip": "GoogleSearchConsoleService.cs",
+              "ViewState": "AgIAAOcBAAAAAAAAAAAAwO4BAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T03:10:50.589Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WebsitesManagement.cs [Design]",
+              "DocumentMoniker": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\WebsitesManagement.cs",
+              "RelativeDocumentMoniker": "WebsitesManagement.cs",
+              "ToolTip": "D:\\Nguy\u1EC5n V\u0103n Ho\u00E0ng Anh - KTPM K20A\\SEOAnalyzer\\WebsitesManagement.cs [Design]",
+              "RelativeToolTip": "WebsitesManagement.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T19:09:01.523Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

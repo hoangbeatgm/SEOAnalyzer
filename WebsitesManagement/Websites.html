@@ -1,0 +1,498 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 18px;
+            margin: 0 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        #addWebsiteBtn {
+            margin-bottom: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            display: block;
+            width: 200px;
+            margin: 0;
+            font-size: 16px;
+        }
+
+            #addWebsiteBtn:hover {
+                background-color: #0056b3;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #126804;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e8f5e9;
+        }
+
+        .actions button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin: 2px;
+        }
+
+            .actions button:hover {
+                background-color: #45a049;
+            }
+
+            .actions button.delete {
+                background-color: #fa110a;
+            }
+
+                .actions button.delete:hover {
+                    background-color: #d9534f;
+                }
+
+            .actions button.edit {
+                background-color: #f0ad4e;
+            }
+
+                .actions button.edit:hover {
+                    background-color: #ec971f;
+                }
+
+        #addFormContainer, #editFormContainer {
+            display: none;
+            margin-top: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 500px;
+            margin-left: 0;
+            margin-right: auto;
+            transition: all 0.3s ease;
+        }
+
+            #addFormContainer h3, #editFormContainer h3 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #0094ff;
+                font-size: 1.3em;
+                font-weight: 600;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            column-gap: 15px;
+            align-items: center;
+        }
+
+            .form-group label {
+                font-weight: 600;
+                white-space: nowrap;
+                text-align: left;
+                width: 35%;
+                margin-bottom: 0;
+                color: #444;
+            }
+
+            .form-group input {
+                width: 60%;
+                padding: 9px 12px;
+                box-sizing: border-box;
+                border: 1px solid #dcdcdc;
+                border-radius: 6px;
+                margin: 0;
+                display: block;
+                font-size: 14px;
+                transition: border-color 0.2s ease-in-out;
+            }
+
+                .form-group input:focus {
+                    outline: none;
+                    border-color: #0094ff;
+                    box-shadow: 0 0 0 2px rgba(0, 148, 255, 0.1);
+                }
+
+        .form-buttons {
+            text-align: right;
+            margin-top: 22px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+            .form-buttons button {
+                padding: 9px 20px;
+                border-radius: 6px;
+                font-weight: 500;
+                transition: all 0.2s ease;
+            }
+
+                .form-buttons button[type="submit"] {
+                    background-color: #0094ff;
+                    color: white;
+                    border: none;
+                    margin-left: 10px;
+                }
+
+                    .form-buttons button[type="submit"]:hover {
+                        background-color: #0078d4;
+                        transform: translateY(-1px);
+                    }
+
+                .form-buttons button[type="button"] {
+                    background-color: #f5f5f5;
+                    color: #555;
+                    border: 1px solid #ddd;
+                }
+
+                    .form-buttons button[type="button"]:hover {
+                        background-color: #e8e8e8;
+                    }
+
+        /* Improve file input appearance */
+        .form-group input[type="file"] {
+            padding: 6px;
+            background-color: #f9f9f9;
+        }
+
+        /* Add a subtle animation when forms appear */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #addFormContainer.visible, #editFormContainer.visible {
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .json-preview {
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: monospace;
+            background-color: #f8f9fa;
+            padding: 5px;
+            border-radius: 4px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .toggle-btn {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 3px 8px;
+            background-color: #ddd;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .form-group label {
+                width: 100%;
+                text-align: left;
+            }
+
+            .form-group input {
+                width: 100%;
+            }
+
+            #addFormContainer, #editFormContainer {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Quản lý danh sách Website</h1>
+    <button id="addWebsiteBtn">Thêm Website</button>
+
+    <div id="addFormContainer">
+        <h3>Thêm Website Mới</h3>
+        <form id="addForm">
+            <div class="form-group">
+                <label for="addUrlPage">Đường dẫn Website:</label>
+                <input placeholder="https://websitecuaban.com/" type="text" id="addUrlPage" required />
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit">Thêm Website</button>
+                <button type="button" onclick="cancelAdd()">Huỷ</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="editFormContainer">
+        <h3>Chỉnh sửa Website</h3>
+        <form id="editForm">
+            <div class="form-group" style="display:none">
+                <label for="editId">ID:</label>
+                <input type="text" id="editId" disabled />
+            </div>
+
+            <div class="form-group">
+                <label for="editUrlPage">Website của bạn:</label>
+                <input type="text" id="editUrlPage" required />
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit">Lưu thay đổi</button>
+                <button type="button" onclick="cancelEdit()">Huỷ</button>
+            </div>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Trang Web</th>
+                <th>Ngày tạo</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="websitesTableBody">
+            <!-- Dữ liệu sẽ được thêm động từ JavaScript -->
+        </tbody>
+    </table>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Global variable to store current credentials for edit
+        let currentCredentials = {};
+
+        function loadWebsitesData(websites) {
+            console.log("Dữ liệu nhận được từ C#:", websites);
+
+            const tableBody = document.getElementById('websitesTableBody');
+            tableBody.innerHTML = '';
+
+            if (!websites || websites.length === 0) {
+                console.log("Không có dữ liệu website");
+                tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center">Không có dữ liệu website</td></tr>';
+                return;
+            }
+
+            websites.forEach(website => {
+                console.log("Đang xử lý website:", website);
+
+                const row = document.createElement('tr');
+
+                // Store the full credentials JSON for editing
+                currentCredentials[website.id] = website.credentials_json;
+
+                row.innerHTML = `
+            <td>${website.url_page}</td>
+            <td>${formatDate(website.created_at)}</td>
+            <td class="actions">
+                <button class="edit" onclick="showEditForm('${website.id}', '${website.analytics_propertyId || ''}', '${website.url_page}')">Sửa</button>
+                <button class="delete" onclick="confirmDelete('${website.id}')">Xoá</button>
+            </td>
+        `;
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Format JSON for preview
+        function formatJsonPreview(json) {
+            try {
+                const parsed = JSON.parse(json);
+                const str = JSON.stringify(parsed, null, 2);
+                return str.length > 100 ? str.substring(0, 100) + '...' : str;
+            } catch {
+                return json.length > 100 ? json.substring(0, 100) + '...' : json;
+            }
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString();
+        }
+
+        // Toggle JSON preview
+        function toggleJsonPreview(button) {
+            const pre = button.previousElementSibling;
+            const isExpanded = pre.getAttribute('data-expanded') === 'true';
+
+            if (isExpanded) {
+                pre.textContent = formatJsonPreview(pre.getAttribute('data-full'));
+                pre.removeAttribute('data-expanded');
+                button.textContent = 'Xem thêm';
+            } else {
+                const fullJson = currentCredentials[button.closest('tr').cells[0].textContent];
+                pre.setAttribute('data-full', fullJson);
+                pre.textContent = fullJson;
+                pre.setAttribute('data-expanded', 'true');
+                button.textContent = 'Thu gọn';
+            }
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Add website form handling
+        document.getElementById('addWebsiteBtn').addEventListener('click', () => {
+            document.getElementById('addFormContainer').style.display = 'block';
+            document.getElementById('editFormContainer').style.display = 'none';
+            document.getElementById('addForm').reset();
+        });
+
+        function cancelAdd() {
+            document.getElementById('addFormContainer').style.display = 'none';
+        }
+
+        document.getElementById('addForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const urlPage = document.getElementById('addUrlPage').value.trim();
+            const urlPattern = /^(http:\/\/|https:\/\/)/;
+            if (!urlPattern.test(urlPage)) {
+                showToast('URL không hợp lệ. Vui lòng nhập URL đầy đủ (bao gồm http:// hoặc https://)');
+                return;
+            }
+            const message = {
+                type: 'addWebsite',
+                data: {
+                    url_page: urlPage // Chỉ gửi URL Page
+                }
+            };
+
+            if (window.chrome && window.chrome.webview && window.chrome.webview.postMessage) {
+                window.chrome.webview.postMessage(JSON.stringify(message));
+                cancelAdd();
+            } else {
+                showToast('Lỗi kết nối với ứng dụng');
+            }
+        });
+
+        function showEditForm(websiteId, propertyId, urlPage) {
+            // Hiển thị form chỉnh sửa và ẩn form thêm mới
+            document.getElementById('editFormContainer').style.display = 'block';
+            document.getElementById('addFormContainer').style.display = 'none';
+
+            // Điền thông tin vào form chỉnh sửa từ các tham số
+            document.getElementById('editId').value = websiteId;
+            document.getElementById('editUrlPage').value = urlPage;
+
+            console.log("Editing website ID:", websiteId);
+            console.log("Property ID:", propertyId);
+            console.log("URL Page:", urlPage);
+        }
+
+        function cancelEdit() {
+            document.getElementById('editFormContainer').style.display = 'none';
+        }
+        document.getElementById('editForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('editId').value;
+            const urlPage = document.getElementById('editUrlPage').value.trim();
+                sendEditMessage(id, urlPage);
+            
+        });
+        function sendEditMessage(id, urlPage) {
+            const message = {
+                type: 'editWebsite',
+                data: {
+                    id: id,
+                    url_page: urlPage,
+                }
+            };
+
+            if (window.chrome && window.chrome.webview && window.chrome.webview.postMessage) {
+                window.chrome.webview.postMessage(JSON.stringify(message));
+                cancelEdit();
+            } else {
+                showToast('Lỗi kết nối với ứng dụng');
+            }
+        }
+
+        function confirmDelete(websiteId) {
+            if (confirm('Bạn có chắc chắn muốn xóa website này?')) {
+                const message = {
+                    type: 'deleteWebsite',
+                    id: websiteId
+                };
+
+                if (window.chrome && window.chrome.webview) {
+                    window.chrome.webview.postMessage(JSON.stringify(message));
+                } else {
+                    showToast('Lỗi kết nối với ứng dụng');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

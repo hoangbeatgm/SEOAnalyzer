@@ -1,0 +1,178 @@
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-x86\native\WebView2Loader.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-arm64\native\WebView2Loader.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Analytics_propertyId.txt
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\credentials.json
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\SearchConsole_siteURL.txt
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Web\index.html
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.exe
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.deps.json
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.runtimeconfig.json
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.pdb
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Google.Apis.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Google.Apis.Auth.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Google.Apis.Core.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\System.Net.Http.Formatting.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Newtonsoft.Json.Bson.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\System.Management.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win\lib\net7.0\System.Management.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.Core.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.Core.xml
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.Wpf.xml
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.Form1.resources
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.AssemblyInfo.cs
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnaly.C22A7B8F.Up2Date
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.dll
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\refint\SEOAnalyzer.dll
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.pdb
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.genruntimeconfig.cache
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\ref\SEOAnalyzer.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\WebsitesManagement\Websites.html
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Azure.Core.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Azure.Identity.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Google.Apis.GoogleAnalyticsAdmin.v1alpha.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Bcl.Cryptography.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Identity.Client.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.SqlServer.Server.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\System.ClientModel.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\System.Configuration.ConfigurationManager.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\System.Diagnostics.EventLog.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\System.Memory.Data.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\cs\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\pl\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\admin\Desktop\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.Properties.Resources.resources
+C:\Users\admin\Desktop\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.WebsitesManagement.resources
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Analytics_propertyId.txt
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\credentials.json
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\SearchConsole_siteURL.txt
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-x86\native\WebView2Loader.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-arm64\native\WebView2Loader.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\WebsitesManagement\Websites.html
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Web\index.html
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.exe
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.deps.json
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.runtimeconfig.json
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\SEOAnalyzer.pdb
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Azure.Core.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Azure.Identity.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Google.Apis.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Google.Apis.Auth.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Google.Apis.Core.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Google.Apis.GoogleAnalyticsAdmin.v1alpha.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\System.Net.Http.Formatting.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Bcl.Cryptography.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Identity.Client.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.SqlServer.Server.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Newtonsoft.Json.Bson.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\System.ClientModel.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\System.Configuration.ConfigurationManager.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\System.Diagnostics.EventLog.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\System.Management.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\System.Memory.Data.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\cs\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\pl\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win\lib\net7.0\System.Management.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.Core.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.Core.xml
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\bin\Release\net8.0-windows\Microsoft.Web.WebView2.Wpf.xml
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.Form1.resources
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.Properties.Resources.resources
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.WebsitesManagement.resources
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.AssemblyInfo.cs
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnaly.C22A7B8F.Up2Date
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\refint\SEOAnalyzer.dll
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.pdb
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\SEOAnalyzer.genruntimeconfig.cache
+C:\Users\admin\Desktop\Đồ Án 2025\SEOAnalyzer\obj\Release\net8.0-windows\ref\SEOAnalyzer.dll
